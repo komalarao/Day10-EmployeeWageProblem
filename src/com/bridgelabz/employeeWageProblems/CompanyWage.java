@@ -12,13 +12,12 @@ public class CompanyWage {
         this.empRatePerHour = empRatePerHour;
         this.numOfWorkingDays = numOfWorkingDays;
         this.maxHoursInMonth = maxHoursInMonth;
+        totalEmpWage = 0;
     }
-
 
     public void setTotalEmpWage(int totalEmpWage) {
         this.totalEmpWage = totalEmpWage;
     }
-
     @Override
     public String toString() {
         return "\n"+companyName+" company Employee Monthly Wage : $" + totalEmpWage+"\n\n";
