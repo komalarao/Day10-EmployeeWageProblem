@@ -4,9 +4,32 @@ public class EmployeeWage {
 	
 	public static void main(String[] args) {
         System.out.println("Welcome to Employee Wage Computation Problem");
-        //Add Part time EmployeeWage
-        int Working_Hours = 8;
-        int Daily_Wage =  Working_Hours* 20;
-        System.out.println("Daily Part Time Wage is : " +Daily_Wage);
+        double Emp_Check = Math.floor(Math.random()*10) % 2;
+        int working_Hours = 0;
+        int Daily_Wage = 0;
+        int EmpRate_PerHr = 20;
+        int isFullTime = 0;
+        int isPartTime = 0;
+        //Solving using switch case
+        switch ((int)(Emp_Check)) {
+
+            case 1 :
+                isFullTime = 1;
+                working_Hours = 8;
+                System.out.println("Employee is working Full Time");
+                System.out.println("Working hours of Employee are : " + working_Hours);
+                break;
+            case 0 :
+                isPartTime = 0;
+                working_Hours = 8;
+                System.out.println("Employee is working Part Time");
+                System.out.println("Working hours of Employee are : " + working_Hours);
+
+                break;
+            default :
+            	working_Hours= 0;
+                break;
+
+        }
     }
 }
