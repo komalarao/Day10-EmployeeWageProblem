@@ -2,73 +2,49 @@ package com.bridgelabz.employeeWageProblems;
 
 public class EmployeeWage {
 	
-	public static void main(String[] args) {
+	public static final int IS_FULL_TIME = 1;
+    public static final int IS_PART_TIME = 2;
+    public static final int EMP_RATE_PER_HOUR = 20;
+    public static final int NUM_OF_WORKING_DAYS = 20;
+    public static final int MAX_HRS_IN_MONTH = 100;
+
+    public static void main (String args[]){
         System.out.println("Welcome to Employee Wage Computation Problem");
-        double Emp_Check = 0.0;
-        int Working_Hours = 0;
-        int Daily_Wage = 0;
-        int EmpRate_PerHr = 20;
-        int isFullTime = 0;
-        int isPartTime = 0;
-        int Monthly_Wage = 0;
-        int Working_Days = 20;
-        int days = 0;
-        int Total_Working_Hours = 0;
-        int Max_Hours = 100;
-        int Max_Days = 20;
-        int wage = 0;
-        int Total_Wage = 0;
-        System.out.println("Welcome to Employee Wage Computation Program!");
-
-        //Calculate Wages till a condition of total working hours or days is reached for a month
-        while (days < Max_Days && Total_Working_Hours < Max_Hours) {
-
-        	Emp_Check = Math.floor(Math.random()*10) % 3;
-            switch ((int)(Emp_Check)) {
-
-                case 1 :
-                    isFullTime = 1;
-                    Working_Hours = 8;
-                    System.out.println("Employee is working Full Time");
-                    System.out.println("Working hours of Employee are : " + Working_Hours);
-                    break;
-
-                case 0 :
-                    isPartTime = 0;
-                    Working_Hours = 8;
-                    System.out.println("Employee is working Part Time");
-                    System.out.println("Working hours of Employee are : " + Working_Hours);
-                    break;
-
-                case 2 :
-                	Working_Hours = 0;
-                    System.out.println("Employee is Absent");
-                    System.out.println("Working hours of Employee are : " + Working_Hours);
-                    break;
-
-                default :
-                	Working_Hours = 0;
-                    break;
-
-            }
-
-            Total_Working_Hours = Total_Working_Hours + Working_Hours;
-
-            if (Total_Working_Hours > Max_Hours) {
-            	Total_Working_Hours = Total_Working_Hours - Working_Hours;
-            }
-
-            wage = Working_Hours * EmpRate_PerHr;
-            Total_Wage = Total_Wage + wage;
-            days++;
-
-        }
-
-        System.out.println();
-        System.out.println("Total number of Days worked : " + days);
-        System.out.println("Total number of Hours worked : " + Total_Working_Hours);
-        System.out.println("Total Wage of Employee for the month : $" + Total_Wage);
-
+        computeEmpWage();
     }
 
+    public static void computeEmpWage () {
+        int empHrs = 0;
+        int empWage = 0;
+        int totalEmpWage = 0;
+        int totalWorkingDays = 0;
+        int totalEmpHrs = 0;
+
+        for (totalWorkingDays = 1; totalEmpHrs <= MAX_HRS_IN_MONTH && totalWorkingDays < NUM_OF_WORKING_DAYS; totalWorkingDays++) {
+            int empCheck = (int) Math.floor(Math.random() * 10) % 3;
+
+            switch (empCheck) {
+                case IS_FULL_TIME:
+                    empHrs = 8;
+                    System.out.println("Employee is present Full time.");
+                    break;
+
+                case IS_PART_TIME:
+                    empHrs = 4;
+                    System.out.println("Employee is present Part time.");
+                    break;
+
+                default:
+                    empHrs = 0;
+                    System.out.println("Employee is absent.");
+            }
+            empWage = empHrs * EMP_RATE_PER_HOUR;
+            totalEmpHrs += empHrs;
+            //totalEmpWage += empWage;
+            System.out.println("Day " + totalWorkingDays + " Employee hours : " + empHrs + "	Wage $" + empWage);
+        }
+        totalEmpWage = totalEmpHrs * EMP_RATE_PER_HOUR;
+        System.out.println();
+        System.out.println("Employee Monthly Wage : $" + totalEmpWage);
+    }
 }
