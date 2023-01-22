@@ -4,22 +4,40 @@ public class EmployeeWage {
 	
 	public static final int IS_FULL_TIME = 1;
     public static final int IS_PART_TIME = 2;
-    public static void main(String args[]) {
-        computeEmpWage("Google", 50, 15, 200);
-        computeEmpWage("Amazon", 80, 20, 120);
-        computeEmpWage("Meta", 60, 20, 100);
-        computeEmpWage("Netflix", 90, 18, 220);
-        computeEmpWage("Tesla", 100, 20, 250);
+
+    private final String companyName;
+    private final int empRatePerHour;
+    private final int numOfWorkingDays;
+    private final int maxHoursInMonth;
+    private int totalEmpWage;
+
+    public EmployeeWage(String companyName, int empRatePerHour, int numOfWorkingDays, int maxHoursInMonth) {
+        this.companyName = companyName;
+        this.empRatePerHour = empRatePerHour;
+        this.numOfWorkingDays = numOfWorkingDays;
+        this.maxHoursInMonth = maxHoursInMonth;
     }
 
-    public static void computeEmpWage(String Company_Name, int EmpRate_PerHour, int NumOf_Working_Days, int Max_Hours_In_Month) {
+    public static void main(String args[]) {
+        EmployeeWage google = new EmployeeWage("Google", 50, 15, 200);
+        EmployeeWage amazon = new EmployeeWage("Amazon", 80, 20, 120);
+        EmployeeWage netflix = new EmployeeWage("Netflix", 90, 18, 220);
+
+        google.computeEmpWage();
+        System.out.println(google);
+        amazon.computeEmpWage();
+        System.out.println(amazon);
+        netflix.computeEmpWage();
+        System.out.println(netflix);
+    }
+
+    public void computeEmpWage() {
         int Emp_Hrs = 0;
         int Emp_Wage = 0;
-        int Total_EmpWage = 0;
         int Total_Working_Days = 0;
         int Total_EmpHrs = 0;
 
-        for (Total_Working_Days = 1; Total_EmpHrs <= Max_Hours_In_Month && Total_Working_Days < NumOf_Working_Days; Total_Working_Days++) {
+        for (Total_Working_Days = 1; Total_EmpHrs <= maxHoursInMonth && Total_Working_Days < numOfWorkingDays; Total_Working_Days++) {
             int empCheck = (int) Math.floor(Math.random() * 10) % 3;
 
             switch (empCheck) {
@@ -37,13 +55,17 @@ public class EmployeeWage {
                 	Emp_Hrs = 0;
                     System.out.println("Employee is absent.");
             }
-            Emp_Wage = Emp_Hrs * EmpRate_PerHour;
+            Emp_Wage = Emp_Hrs * empRatePerHour;
             Total_EmpHrs += Emp_Hrs;
             //totalEmpWage += empWage;
             System.out.println("Day " + Total_Working_Days + "	Employee hours : " + Emp_Hrs +"	Wage $" + Emp_Wage);
         }
-        Total_EmpWage = Total_EmpHrs * EmpRate_PerHour;
+        totalEmpWage = Total_EmpHrs * empRatePerHour;
         System.out.println();
-        System.out.println(Company_Name+" company Employee Monthly Wage : $" + Total_EmpWage+"\n\n");
+    }
+
+    @Override
+    public String toString() {
+        return " "+companyName+" company Employee Monthly Wage : $" + totalEmpWage+"\n\n";
     }
 }
